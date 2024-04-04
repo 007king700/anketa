@@ -12,39 +12,19 @@
     <form action="/submit" method="post" class="form-container">
         <div>
             <p>Ohodnoťte jednotlivé dny v týdnu na škále od 1 do 10:</p>
-            <label for="monday">Pondělí:</label>
-            <input type="range" id="monday" name="monday" min="1" max="10" step="1">
-            <span id="mondayValue"></span>
-            <label for="tuesday">Úterý:</label>
-            <input type="range" id="tuesday" name="tuesday" min="1" max="10" step="1">
-            <span id="tuesdayValue"></span>
-            <label for="wednesday">Středa:</label>
-            <input type="range" id="wednesday" name="wednesday" min="1" max="10" step="1">
-            <span id="wednesdayValue"></span>
-            <label for="thursday">Čtvrtek:</label>
-            <input type="range" id="thursday" name="thursday" min="1" max="10" step="1">
-            <span id="thursdayValue"></span>
-            <label for="friday">Pátek:</label>
-            <input type="range" id="friday" name="friday" min="1" max="10" step="1">
-            <span id="fridayValue"></span>
-            <label for="saturday">Sobota:</label>
-            <input type="range" id="saturday" name="saturday" min="1" max="10" step="1">
-            <span id="saturdayValue"></span>
-            <label for="sunday">Neděle:</label>
-            <input type="range" id="sunday" name="sunday" min="1" max="10" step="1">
-            <span id="sundayValue"></span>
+            <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
+                <label for="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %>:</label>
+                <input type="range" id="<%= day %>" name="<%= day %>" min="1" max="10" step="1">
+                <span id="<%= day %>Value"></span><br>
+            <% }) %>
         </div>
         
         <div>
             <label for="bestDay">Vyberte váš nejoblíbenější den:</label>
             <select id="bestDay" name="bestDay">
-                <option value="monday">Pondělí</option>
-                <option value="tuesday">Úterý</option>
-                <option value="wednesday">Středa</option>
-                <option value="thursday">Čtvrtek</option>
-                <option value="friday">Pátek</option>
-                <option value="saturday">Sobota</option>
-                <option value="sunday">Neděle</option>
+                <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
+                    <option value="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %></option>
+                <% }) %>
             </select>
         </div>
         <div>
@@ -54,13 +34,9 @@
         <div>
             <label for="worstDay">Vyberte váš nejméně oblíbený den:</label>
             <select id="worstDay" name="worstDay">
-                <option value="monday">Pondělí</option>
-                <option value="tuesday">Úterý</option>
-                <option value="wednesday">Středa</option>
-                <option value="thursday">Čtvrtek</option>
-                <option value="friday">Pátek</option>
-                <option value="saturday">Sobota</option>
-                <option value="sunday">Neděle</option>
+                <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
+                    <option value="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %></option>
+                <% }) %>
             </select>
         </div>
         <div>
@@ -72,48 +48,13 @@
     </form>
     <%- include('blocks/footer'); -%>
     <script>
-        const mondayIn= document.getElementById('monday');
-        const mondayOut = document.getElementById('mondayValue');
-        mondayOut.innerHTML = mondayIn.value; // Zobrazit výchozí hodnotu
-        mondayIn.oninput = function() {
-            mondayOut.innerHTML = this.value;
-        }
-        const tuesday= document.getElementById('tuesday');
-        const tuesdayOut = document.getElementById('tuesdayValue');
-        tuesdayOut.innerHTML = tuesday.value; // Zobrazit výchozí hodnotu
-        tuesday.oninput = function() {
-            tuesdayOut.innerHTML = this.value;
-        }
-        const wednesdayIn= document.getElementById('wednesday');
-        const wednesdayOut = document.getElementById('wednesdayValue');
-        wednesdayOut.innerHTML = wednesdayIn.value; // Zobrazit výchozí hodnotu
-        wednesdayIn.oninput = function() {
-            wednesdayOut.innerHTML = this.value;
-        }
-        const thursdayIn= document.getElementById('thursday');
-        const thursdayOut = document.getElementById('thursdayValue');
-        thursdayOut.innerHTML = thursdayIn.value; // Zobrazit výchozí hodnotu
-        thursdayIn.oninput = function() {
-            thursdayOut.innerHTML = this.value;
-        }
-        const fridayIn= document.getElementById('friday');
-        const fridayOut = document.getElementById('fridayValue');
-        fridayOut.innerHTML = fridayIn.value; // Zobrazit výchozí hodnotu
-        fridayIn.oninput = function() {
-            fridayOut.innerHTML = this.value;
-        }
-        const saturdayIn= document.getElementById('saturday');
-        const saturdayOut = document.getElementById('saturdayValue');
-        saturdayOut.innerHTML = saturdayIn.value; // Zobrazit výchozí hodnotu
-        saturdayIn.oninput = function() {
-            saturdayOut.innerHTML = this.value;
-        }
-        const sundayIn= document.getElementById('sunday');
-        const sundayOut = document.getElementById('sundayValue');
-        sundayOut.innerHTML = sundayIn.value; // Zobrazit výchozí hodnotu
-        sundayIn.oninput = function() {
-            sundayOut.innerHTML = this.value;
-        }
+        document.querySelectorAll('input[type="range"]').forEach(input => {
+            const output = document.getElementById(input.id + "Value");
+            output.innerHTML = input.value; // Zobrazit výchozí hodnotu
+            input.oninput = function() {
+                output.innerHTML = this.value;
+            };
+        });
     </script>
 </body>
 </html>

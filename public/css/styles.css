@@ -110,15 +110,14 @@ span {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    table-layout: fixed; /* Přidáno pro konzistentní šířku sloupců */
 }
 
-th,
-td {
-    padding: 8px;
+th, td {
+    padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; /* Čára mezi řádky */
 }
 
 th {
@@ -126,12 +125,29 @@ th {
     color: white;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+tr:hover {background-color: #b49e9e;} /* Zvýraznění řádku při najetí myši */
+
+  /* Styly pro dělení tabulek na dvě části */
+.table-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
-tr:hover {
-    background-color: #ddd;
+.table-container table {
+    width: 48%; /* Menší šířka pro umístění dvou tabulek vedle sebe */
+    margin: 0; /* Odebrání margin, pokud je potřeba */
+}
+
+/* Přidání vertikální čáry mezi tabulky */
+.table-container:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background-color: #000;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Přidáváme trochu paddingu na stránky pro lepší vzhled */
@@ -149,5 +165,5 @@ footer {
     color: #fff;
     text-align: center;
     padding: 7px;
-    position: relative;
+    position: static;
 }

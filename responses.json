@@ -1,58 +1,104 @@
 [
   {
-    "id": 1710794019428,
-    "timestamp": "2024-03-18T20:33:39.428Z",
+    "id": 1712248350563,
+    "timestamp": "2024-04-04T16:32:30.563Z",
     "answers": {
-      "hours": "6.5",
-      "sport": "lyžování",
-      "importance": "4",
-      "roleModel": "Ester Ledecká"
-    }
-  },
-  {
-    "id": 1710795150000,
-    "timestamp": "2024-03-18T20:52:30.000Z",
-    "answers": {
-      "hours": "9",
-      "sport": "atletika",
-      "importance": "5",
-      "roleModel": "Noah Lyles"
-    }
-  },
-  {
-    "id": 1710795194508,
-    "timestamp": "2024-03-18T20:53:14.508Z",
-    "answers": {
-      "hours": "5",
-      "sport": "golf",
-      "importance": "2",
-      "roleModel": "Jaromír Jágr"
-    }
-  },
-  {
-    "id": 1710800055317,
-    "timestamp": "2024-03-18T22:14:15.317Z",
-    "answers": {
-      "hours": "2.1",
-      "sport": "atletika",
-      "importance": "3",
-      "roleModel": ""
-    }
-  },
-  {
-    "id": 1712213314160,
-    "timestamp": "2024-04-04T06:48:34.160Z",
-    "answers": {
-      "monday": "5",
-      "tuesday": "7",
+      "monday": "6",
+      "tuesday": "6",
       "wednesday": "6",
       "thursday": "6",
       "friday": "6",
       "saturday": "6",
       "sunday": "6",
-      "hours": "1",
-      "sport": "atletika",
-      "roleModel": ""
+      "bestDay": "monday",
+      "bestDayReason": "",
+      "worstDay": "monday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712256168627,
+    "timestamp": "2024-04-04T18:42:48.627Z",
+    "answers": {
+      "monday": "6",
+      "tuesday": "6",
+      "wednesday": "6",
+      "thursday": "6",
+      "friday": "6",
+      "saturday": "6",
+      "sunday": "6",
+      "bestDay": "monday",
+      "bestDayReason": "",
+      "worstDay": "monday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712260986437,
+    "timestamp": "2024-04-04T20:03:06.437Z",
+    "answers": {
+      "monday": "6",
+      "tuesday": "6",
+      "wednesday": "6",
+      "thursday": "6",
+      "friday": "6",
+      "saturday": "6",
+      "sunday": "6",
+      "bestDay": "tuesday",
+      "bestDayReason": "",
+      "worstDay": "thursday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712261008633,
+    "timestamp": "2024-04-04T20:03:28.633Z",
+    "answers": {
+      "monday": "6",
+      "tuesday": "9",
+      "wednesday": "6",
+      "thursday": "6",
+      "friday": "3",
+      "saturday": "6",
+      "sunday": "6",
+      "bestDay": "friday",
+      "bestDayReason": "",
+      "worstDay": "sunday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712261028398,
+    "timestamp": "2024-04-04T20:03:48.398Z",
+    "answers": {
+      "monday": "10",
+      "tuesday": "4",
+      "wednesday": "5",
+      "thursday": "6",
+      "friday": "8",
+      "saturday": "3",
+      "sunday": "8",
+      "bestDay": "wednesday",
+      "bestDayReason": "",
+      "worstDay": "saturday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712263772934,
+    "timestamp": "2024-04-04T20:49:32.934Z",
+    "answers": {
+      "monday": "6",
+      "tuesday": "6",
+      "wednesday": "6",
+      "thursday": "6",
+      "friday": "6",
+      "saturday": "6",
+      "sunday": "6",
+      "bestDay": "monday",
+      "bestDayReason": "sdfsdfwse",
+      "worstDay": "monday",
+      "worstDayReason": "fgwgwgweg"
     }
   }
 ]

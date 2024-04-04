@@ -4,38 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Výsledky ankety</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <%- include('blocks/header'); -%>
-    <div class="container">
-        <table>
-        <tr>
-            <th>ID</th>
-            <th>Datum</th>
-            <th>Čas</th>
-            <th>Hodiny týdně</th>
-            <th>Zaměření TV</th>
-            <th>Význam sportu</th>
-            <th>Sportovní vzor</th>
-        </tr>
-        <% responses.forEach(function(response) { 
-            const date = new Date(response.timestamp);
-            const dateString = `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()}`;
-            const timeString = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
-        %>
-            <tr>
-                <td><%= response.id %></td>
-                <td><%= dateString %></td>
-                <td><%= timeString %></td>
-                <td><%= response.answers.hours %></td>
-                <td><%= response.answers.sport %></td>
-                <td><%= response.answers.importance %></td>
-                <td><%= response.answers.roleModel %></td>
-            </tr>
-        <% }); %>
-        </table>
-    </div>  
-    <%- include('blocks/footer'); -%>  
+    <h1>Výsledky ankety</h1>
+
+    <div>
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const data = {
+                labels: ['Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota', 'Neděle'],
+                datasets: [{
+                    label: 'Průměrné hodnocení dne',
+                    data: [0, 0, 0, 0, 0, 0, 0], // Tato data se naplní dynamicky
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            <% 
+            let totalRatings = {monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0};
+            let countRatings = {monday: 0, tuesday: 0, wednesday: 0, thursday: 0, friday: 0, saturday: 0, sunday: 0};
+            responses.forEach(response => {
+                Object.entries(response.answers).forEach(([day, rating]) => {
+                    if(totalRatings.hasOwnProperty(day)) {
+                        totalRatings[day] += parseInt(rating, 10);
+                        countRatings[day]++;
+                    }
+                });
+            });
+            Object.keys(totalRatings).forEach(day => {
+                if(countRatings[day] > 0) {
+                    totalRatings[day] = totalRatings[day] / countRatings[day];
+                }
+            });
+            %>
+            data.datasets[0].data = [<%= Object.values(totalRatings).join(", ") %>];
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Předávání dat z EJS do JavaScriptu
+        const responses = <%- JSON.stringify(responses) %>;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            function openDetails(day, type) {
+                const newWindow = window.open('', '_blank');
+                const title = type === 'best' ? 'Nejoblíbenější den' : 'Nejméně oblíbený den';
+                const filteredResponses = responses.filter(response => response.answers[type + 'Day'] === day);
+                
+                let content = `<h1>${title}: ${day}</h1>`;
+                content += `<table border='1'><tr><th>ID</th><th>Čas</th><th>Důvod</th></tr>`;
+        
+                filteredResponses.forEach(response => {
+                    content += `<tr><td>${response.id}</td><td>${response.timestamp}</td><td>${response.answers[type + 'DayReason'] || 'Není uveden důvod'}</td></tr>`;
+                });
+        
+                content += `</table>`;
+                newWindow.document.write(content);
+                newWindow.document.title = `${title}: ${day}`;
+            }
+            
+            document.querySelectorAll('tr[data-day]').forEach(row => {
+                row.addEventListener('click', function() {
+                    const day = this.getAttribute('data-day');
+                    const type = this.getAttribute('data-type');
+                    openDetails(day, type);
+                });
+            });
+        });
+    </script>
+    
+
+        <div style="display: flex; justify-content: space-between;">
+            <table style="width: 48%;">
+                <thead>
+                    <tr>
+                        <th>Nejoblíbenější den</th>
+                        <th>Počet hlasů</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let bestDayCounts = {}; let worstDayCounts = {};
+                    responses.forEach(response => {
+                        const { bestDay, worstDay } = response.answers;
+                        bestDayCounts[bestDay] = (bestDayCounts[bestDay] || 0) + 1;
+                        worstDayCounts[worstDay] = (worstDayCounts[worstDay] || 0) + 1;
+                    });
+                    const sortedBestDays = Object.entries(bestDayCounts).sort((a, b) => b[1] - a[1]);
+                    const sortedWorstDays = Object.entries(worstDayCounts).sort((a, b) => b[1] - a[1]);
+                    sortedBestDays.forEach(([day, count]) => { %>
+                        <tr data-day="<%= day %>" data-type="best">
+                            <td><%= day %></td>
+                            <td><%= count %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        
+            <table style="width: 48%;">
+                <thead>
+                    <tr>
+                        <th>Nejméně oblíbený den</th>
+                        <th>Počet hlasů</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% sortedWorstDays.forEach(([day, count]) => { %>
+                        <tr data-day="<%= day %>" data-type="worst">
+                            <td><%= day %></td>
+                            <td><%= count %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+    <%- include('blocks/footer.ejs'); %>
 </body>
 </html>
