@@ -5,15 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webová anketa</title>
     <link rel="stylesheet" href="css/styles.css">
+    <%
+        const dayNames = {
+            "monday": "Pondělí",
+            "tuesday": "Úterý",
+            "wednesday": "Středa",
+            "thursday": "Čtvrtek",
+            "friday": "Pátek",
+            "saturday": "Sobota",
+            "sunday": "Neděle"
+        };
+        %>
 </head>
 <body>
     <%- include('blocks/header'); -%>
-    <h2>Anketa o sportu a pohybu</h2>
+    <h2>Anketa o oblíbenosti dnů</h2>
     <form action="/submit" method="post" class="form-container">
         <div>
             <p>Ohodnoťte jednotlivé dny v týdnu na škále od 1 do 10:</p>
             <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
-                <label for="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %>:</label>
+                <label for="<%= day %>"><%= dayNames[day] %>:</label>
                 <input type="range" id="<%= day %>" name="<%= day %>" min="1" max="10" step="1">
                 <span id="<%= day %>Value"></span><br>
             <% }) %>
@@ -23,7 +34,7 @@
             <label for="bestDay">Vyberte váš nejoblíbenější den:</label>
             <select id="bestDay" name="bestDay">
                 <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
-                    <option value="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %></option>
+                    <option value="<%= day %>"><%= dayNames[day] %></option>
                 <% }) %>
             </select>
         </div>
@@ -35,7 +46,7 @@
             <label for="worstDay">Vyberte váš nejméně oblíbený den:</label>
             <select id="worstDay" name="worstDay">
                 <% ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].forEach(day => { %>
-                    <option value="<%= day %>"><%= day.charAt(0).toUpperCase() + day.slice(1) %></option>
+                    <option value="<%= day %>"><%= dayNames[day] %></option>
                 <% }) %>
             </select>
         </div>
@@ -44,7 +55,10 @@
             <input type="text" id="worstDayReason" name="worstDayReason">
         </div>
         
-        <button type="submit">Odeslat odpovědi</button>
+        <div class="form-actions">
+            <button type="submit">Odeslat odpovědi</button>
+            <a href="/results" class="button">Zobraz odpovědi</a>
+        </div>
     </form>
     <%- include('blocks/footer'); -%>
     <script>

@@ -100,5 +100,39 @@
       "worstDay": "monday",
       "worstDayReason": "fgwgwgweg"
     }
+  },
+  {
+    "id": 1712502899417,
+    "timestamp": "2024-04-07T15:14:59.417Z",
+    "answers": {
+      "monday": "6",
+      "tuesday": "6",
+      "wednesday": "6",
+      "thursday": "6",
+      "friday": "6",
+      "saturday": "6",
+      "sunday": "6",
+      "bestDay": "monday",
+      "bestDayReason": "",
+      "worstDay": "monday",
+      "worstDayReason": ""
+    }
+  },
+  {
+    "id": 1712504796051,
+    "timestamp": "2024-04-07T15:46:36.051Z",
+    "answers": {
+      "monday": "3",
+      "tuesday": "5",
+      "wednesday": "2",
+      "thursday": "7",
+      "friday": "9",
+      "saturday": "8",
+      "sunday": "8",
+      "bestDay": "friday",
+      "bestDayReason": "konec školy, volný zbytek dne",
+      "worstDay": "wednesday",
+      "worstDayReason": "tělocvik a obecně nudný a dlouhý den ve škole"
+    }
   }
 ]

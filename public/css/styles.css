@@ -8,8 +8,8 @@ body {
 
 
 h1 {
-    color: white;
-    background-color: blue;
+    color: rgb(180, 180, 180);
+    background-color: rgb(67, 67, 151);
     font-size: 30pt;
     padding: 10px;
     margin: 0;
@@ -17,7 +17,7 @@ h1 {
 }
 
 h2 {
-    color: #2955b4;
+    color: #008425;
     text-align: center;
     text-transform: uppercase;
 }
@@ -49,6 +49,7 @@ input[type=range] {
     border: 0.5px solid #cf5656;
     background: #383e3f;
     box-sizing: border-box;
+    color: #fff;
 }
 
 input[type=range] {
@@ -166,4 +167,41 @@ footer {
     text-align: center;
     padding: 7px;
     position: static;
+}
+
+button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2d7b2f; /* Tmavší barva pozadí při najetí */
+}
+
+.button {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #2d7b2f; /* Tmavší barva pozadí při najetí */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between; /* Zarovnání tlačítek na obě strany */
+    gap: 10px; /* Mezera mezi tlačítky */
+    padding: 20px 0; /* Padding nahoře a dole pro oddělení od ostatního obsahu */
 }
